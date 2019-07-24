@@ -10,21 +10,24 @@ import { SwaggerCustomOptions, SwaggerModule, DocumentBuilder } from '@nestjs/sw
 export function swaggerConfig(app: INestApplication) {
     // Swagger configuration
     const options = new DocumentBuilder()
-        // .setTitle('Api Documentation')
-        // .setDescription('Some description')
-        // .setVersion('API version details')
-        // .setBasePath('/api')
-        // .setSchemes('http', 'https')
+        .setTitle('Api Documentation')
+        .setDescription('Some description')
+        .setVersion('API version details')
+        .setBasePath('/api')
+        .setSchemes('http', 'https')
+        .addTag('health', 'Health check')
+        .addTag('auth')
+        .addTag('user')
     // Add all your config here
     .build();
 
     // // Custom swagger options
-    // const customOptions: SwaggerCustomOptions = {
-    //     customSiteTitle: `API Documentation`,
-    // };
+    const customOptions: SwaggerCustomOptions = {
+        customSiteTitle: `API Documentation`,
+    };
 
-    // const document = SwaggerModule.createDocument(app, options);
+    const document = SwaggerModule.createDocument(app, options);
 
     // // Setup swagger endpoint
-    // SwaggerModule.setup(process.env.SWAGGER_ENDPOINT, app, document, customOptions);
+    SwaggerModule.setup(process.env.SWAGGER_ENDPOINT, app, document, customOptions);
 }

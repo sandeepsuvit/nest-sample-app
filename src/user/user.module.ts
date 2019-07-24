@@ -1,8 +1,8 @@
-import { SharedModule } from './../shared/shared.module';
-import { CoreModule } from './../core/core.module';
 import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
+import { CoreModule } from './../core/core.module';
+import { SharedModule } from './../shared/shared.module';
 import { UserController } from './user.controller';
+import { UserService } from './user.service';
 
 @Module({
   imports: [
