@@ -1,8 +1,8 @@
-import { ApiUseTags, ApiOperation, ApiOkResponse, ApiBadRequestResponse, ApiForbiddenResponse, ApiCreatedResponse } from '@nestjs/swagger';
-import { HttpErrorFilter } from './../shared/filters/http-error.filter';
-import { Body, Controller, Get, Post, UseGuards, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseFilters, UseGuards } from '@nestjs/common';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiImplicitHeader, ApiOkResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { AuthGuard } from '../shared/guards/auth.gaurd';
 import { OtpGuard } from '../shared/guards/otp.guard';
+import { HttpErrorFilter } from './../shared/filters/http-error.filter';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UserService } from './user.service';
 
@@ -14,11 +14,13 @@ export class UserController {
     ) {}
 
     @Get()
-    @ApiOperation({ title: 'Get the list of all users, paginated' })
+    @ApiOperation({ title: 'Get the list of all users' })
     @ApiOkResponse({ description: 'success' })
     @ApiBadRequestResponse({ description: 'Bad Request' })
     @ApiForbiddenResponse({ description: 'Forbidden' })
+    @ApiBearerAuth() // Annotation for securing endpoints in swagger
     @UseFilters(new HttpErrorFilter())
+    @ApiImplicitHeader({ name: 'otp', description: 'Opt number' }) // Option to pass header value in swagger
     @UseGuards(AuthGuard, OtpGuard)
     getAll() {
         return this.userService.findAll();

@@ -12,12 +12,14 @@ export function swaggerConfig(app: INestApplication) {
     const options = new DocumentBuilder()
         .setTitle('Api Documentation')
         .setDescription('Some description')
-        .setVersion('API version details')
+        .setVersion('v0.1')
         .setBasePath('/api')
         .setSchemes('http', 'https')
         .addTag('health', 'Health check')
         .addTag('auth')
         .addTag('user')
+        // Enabling authentication in swagger
+        .addBearerAuth()
     // Add all your config here
     .build();
 
