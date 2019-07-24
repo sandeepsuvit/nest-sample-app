@@ -1,9 +1,9 @@
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UserService } from './../user/user.service';
 import { IUser } from './../core/interfaces/user.interface';
 import { AuthDto } from './dtos/auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { JwtPayload } from 'dist/core/interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
